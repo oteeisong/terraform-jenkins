@@ -16,7 +16,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 dir('main') {
-                    withAWS(credentials: 'access-key') {
+                    withAWS(credentials: 'my-cba-aws-credentials') {
                         sh 'terraform init'
                     }
                 }
@@ -28,7 +28,7 @@ pipeline {
             }
             steps {
                 dir('main') {
-                    withAWS(credentials: 'access-key') {
+                    withAWS(credentials: 'my-cba-aws-credentials') {
                         sh 'terraform plan -out=tfplan'
                     }
                 }
@@ -40,7 +40,7 @@ pipeline {
             }
             steps {
                 dir('main') {
-                    withAWS(credentials: 'access-key') {
+                    withAWS(credentials: 'my-cba-aws-credentials') {
                         sh 'terraform apply -auto-approve tfplan'
                     }
                 }
@@ -52,7 +52,7 @@ pipeline {
             }
             steps {
                 dir('main') {
-                    withAWS(credentials: 'access-key') {
+                    withAWS(credentials: 'my-cba-aws-credentials') {
                         sh 'terraform destroy -auto-approve'
                     }
                 }
